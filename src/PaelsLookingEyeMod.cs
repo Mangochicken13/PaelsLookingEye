@@ -9,19 +9,19 @@ public partial class PaelsLookingEyeMod : Node
 {
     public const string ModId = "PaelsLookingEye"; //At the moment, this is used only for the Logger and harmony names.
 
-    public static MegaCrit.Sts2.Core.Logging.Logger Logger { get; } = new(ModId, MegaCrit.Sts2.Core.Logging.LogType.Generic);
+	public static MegaCrit.Sts2.Core.Logging.Logger Logger { get; } = new(ModId, MegaCrit.Sts2.Core.Logging.LogType.Generic);
 
-    public static void Initialize()
-    {
-        Harmony harmony = new(ModId);
+	public static void Initialize()
+	{
+		Harmony harmony = new(ModId);
 
-        harmony.PatchAll();
+		harmony.PatchAll();
 
-        // Logger.Info("Hello, is this thing on?");
+		// Logger.Info("Hello, is this thing on?");
 
-        // foreach (var method in harmony.GetPatchedMethods()) 
-        // {
-        //     Logger.Info("Patched" + method.ToString());
-        // }
-    }
+		// foreach (var method in harmony.GetPatchedMethods()) 
+		// {
+		//     Logger.Info("Patched" + method.ToString());
+		// }
+	}
 }
