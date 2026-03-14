@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgapr4naf1cs"
-path="res://.godot/imported/paels_eye_pupil.png-3b13b50d02b43691b806a227d9b5edd4.ctex"
+uid="uid://cxjtrdw0mproj"
+path="res://.godot/imported/paels_eye_mask.png-3c0083e7d1b40af241c24634d6e20e32.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PaelsLookingEye/paels_eye_pupil.png"
-dest_files=["res://.godot/imported/paels_eye_pupil.png-3b13b50d02b43691b806a227d9b5edd4.ctex"]
+source_file="res://PaelsLookingEye/images/relics/paels_eye_mask.png"
+dest_files=["res://.godot/imported/paels_eye_mask.png-3c0083e7d1b40af241c24634d6e20e32.ctex"]
 
 [params]
 
