@@ -40,6 +40,7 @@
     <PropertyGroup Condition="'$(IsLinux)' == 'true'">
         <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''">$(HOME)/.local/share/Steam/steamapps</SteamLibraryPath>
         <!-- Change the path here if using a downloaded binary instead of the Steam version-->
+        <GodotPath>$(HOME)/.local/bin/godot4.5.1-mono</GodotPath>
         <GodotPath Condition="'$(GodotPath)' == ''">$(SteamLibraryPath)/common/Godot Engine/godot.x11.opt.tools.64</GodotPath>
 
         <!-- The below should not need to be changed. -->
@@ -68,12 +69,12 @@
     <ItemGroup>
         <Reference Include="0Harmony">
             <HintPath>$(Sts2DataDir)/0Harmony.dll</HintPath>
-            <Private>false</Private>
+            <Private>True</Private>
         </Reference>
         <Reference Include="sts2">
             <HintPath>$(Sts2DataDir)/sts2.dll</HintPath>
-            <Private>false</Private>
-            <Publicize>False</Publicize> <!--Allows private/protected field references but may cause errors.-->
+            <Private>True</Private>
+            <Publicize>True</Publicize> <!--Allows private/protected field references but may cause errors.-->
         </Reference>
 
         <PackageReference Include="Alchyr.Sts2.BaseLib" Version="*" PrivateAssets="All" />
