@@ -5,7 +5,7 @@ using MegaCrit.Sts2.Core.Modding;
 namespace PaelsLookingEye;
 
 [ModInitializer(nameof(Initialize))]
-public partial class MainFile : Node
+public partial class PaelsLookingEyeMod : Node
 {
     public const string ModId = "PaelsLookingEye"; //At the moment, this is used only for the Logger and harmony names.
 
@@ -16,5 +16,12 @@ public partial class MainFile : Node
         Harmony harmony = new(ModId);
 
         harmony.PatchAll();
+
+        // Logger.Info("Hello, is this thing on?");
+
+        // foreach (var method in harmony.GetPatchedMethods()) 
+        // {
+        //     Logger.Info("Patched" + method.ToString());
+        // }
     }
 }
