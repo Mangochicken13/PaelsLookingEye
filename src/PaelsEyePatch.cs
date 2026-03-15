@@ -30,6 +30,20 @@ class BasicHolderPatch()
 
     static PackedScene LookingEyeScene => ResourceLoader.Load<PackedScene>("res://PaelsLookingEye/scenes/looking_eye.tscn");
 
+
+    private const string _LookingEyeNode = "LookingEye";
+    private const string _PupilNode = "Pupil";
+
+    private static TextureRect? HasLookingEyeScene(Node parent)
+    {
+        foreach (var child in parent.GetChildren())
+        {
+            if (child.GetNodeOrNull<TextureRect>(_PupilNode) != null)
+                return (TextureRect)child;
+        }
+        return null;
+    }
+
     // Inventory visuals
     [HarmonyPatch(typeof(NRelicInventoryHolder), nameof(NRelicInventoryHolder._Ready))]
     [HarmonyPostfix]
@@ -43,10 +57,8 @@ class BasicHolderPatch()
             var icon_node = relic.Icon;
 
             icon_node.Texture = PaelsEyeBase;
-
-            var scene_instance = LookingEyeScene.Instantiate();
-            icon_node.AddChild(scene_instance);
-            scene_instance.Owner = icon_node;
+            if (HasLookingEyeScene(icon_node) == null)
+                icon_node.AddChild(LookingEyeScene.Instantiate());
         }
     }
 
@@ -61,7 +73,8 @@ class BasicHolderPatch()
         if (model is PaelsEye)
         {
             var icon_node = relic.Icon;
-            icon_node.AddChild(LookingEyeScene.Instantiate());
+            if (HasLookingEyeScene(icon_node) == null)
+                icon_node.AddChild(LookingEyeScene.Instantiate());
         }
     }
 
@@ -75,7 +88,8 @@ class BasicHolderPatch()
             var icon_node = __instance.GetNode<TextureRect>("%RelicIcon");
             icon_node.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
             icon_node.Texture = PaelsEyeBase;
-            icon_node.AddChild(LookingEyeScene.Instantiate());
+            if (HasLookingEyeScene(icon_node) == null)
+                icon_node.AddChild(LookingEyeScene.Instantiate());
         }
     }
 
@@ -88,7 +102,8 @@ class BasicHolderPatch()
         {
             var icon_node = __instance._relicNode.GetChild(0) as TextureRect;
             icon_node.Texture = PaelsEyeBase;
-            icon_node.AddChild(LookingEyeScene.Instantiate());
+            if (HasLookingEyeScene(icon_node) == null)
+                icon_node.AddChild(LookingEyeScene.Instantiate());
         }
     }
 
@@ -98,7 +113,8 @@ class BasicHolderPatch()
     static void OnInspectRelicReady(NInspectRelicScreen __instance)
     {
         var icon_node = __instance._relicImage;
-        icon_node.AddChild(LookingEyeScene.Instantiate());
+        if (HasLookingEyeScene(icon_node) == null)
+            icon_node.AddChild(LookingEyeScene.Instantiate());
     }
 
     [HarmonyPatch(typeof(NInspectRelicScreen), nameof(NInspectRelicScreen.UpdateRelicDisplay))]
@@ -119,7 +135,7 @@ class BasicHolderPatch()
             is_paels_eye = false;
         }
 
-        var child = icon_node.GetNode<TextureRect>("LookingEye");
+        var child = icon_node.GetNode<TextureRect>(_LookingEyeNode);
         if (child != null)
         {
             child.Set("visible", is_paels_eye);
